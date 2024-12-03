@@ -5,15 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRUD PWA</title>
 
-  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
 <script>
-  window.OneSignal = window.OneSignal || [];
-  OneSignal.push(function() {
-    OneSignal.init({
-      appId: "d2a87167-0114-4e09-9105-ed5fafb4241d", // Reemplaza con tu App ID
-      notifyButton: {
-        enable: true, // Habilita el botón de suscripción
-      },
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "d2a87167-0114-4e09-9105-ed5fafb4241d",
     });
   });
 </script>
