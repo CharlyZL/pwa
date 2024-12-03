@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CRUD PWA</title>
+
+  <!-- Manifest -->
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#007bff">
+
+  <!-- Service Worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js')
+        .then(registration => console.log('Service Worker registrado:', registration))
+        .catch(error => console.error('Error al registrar el Service Worker:', error));
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f7f7f7;
+    }
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #007bff;
+    }
+    .task {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .task:last-child {
+      border-bottom: none;
+    }
+    button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button.delete {
+      background: #dc3545;
+    }
+    input[type="text"] {
+      width: calc(100% - 90px);
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>CRUD PWA</h1>
+    <input id="task-input" type="text" placeholder="Nueva tarea">
+    <button id="add-task">Agregar</button>
+    <ul id="task-list"></ul>
+  </div>
+
+  <script>
+    const taskInput = document.getElementById('task-input');
+    const addTaskButton = document.getElementById('add-task');
+    const taskList = document.getElementById('task-list');
+
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    const renderTasks = () => {
+      taskList.innerHTML = '';
+      tasks.forEach((task, index) => {
+        const taskItem = document.createElement('li');
+        taskItem.className = 'task';
+        taskItem.innerHTML = `
+          <span>${task}</span>
+          <button class="delete" data-index="${index}">Eliminar</button>
+        `;
+        taskList.appendChild(taskItem);
+      });
+    };
+
+    const addTask = () => {
+      const task = taskInput.value.trim();
+      if (task) {
+        tasks.push(task);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        taskInput.value = '';
+        renderTasks();
+      }
+    };
+
+    const deleteTask = (index) => {
+      tasks.splice(index, 1);
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      renderTasks();
+    };
+
+    taskList.addEventListener('click', (event) => {
+      if (event.target.classList.contains('delete')) {
+        const index = event.target.dataset.index;
+        deleteTask(index);
+      }
+    });
+
+    addTaskButton.addEventListener('click', addTask);
+    renderTasks();
+  </script>
+</body>
+</html>
