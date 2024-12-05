@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CRUD PWA</title>
 
+  <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+  window.OneSignalDeferred = window.OneSignalDeferred || [];
+  OneSignalDeferred.push(async function(OneSignal) {
+    await OneSignal.init({
+      appId: "898c9972-0ccb-40e0-8dfa-87fd079eaf9e",
+      serviceWorkerPath: 'OneSignalSDK-v16-ServiceWorker/OneSignalSDKWorker.js', // Ruta al archivo
+    });
+  });
+</script>
+
+
   <!-- Manifest -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#007bff">
