@@ -1,11 +1,7 @@
 const CACHE_NAME = 'crud-pwa-cache-v1';
 const urlsToCache = [
-  './index.html',
-  './manifest.json',
-  './style.css', // Si tienes estilos en un archivo externo
-  './script.js', // Si tienes scripts externos
-  './icon-192x192.png',
-  './icon-512x512.png'
+  'index.html',
+  'manifest.json',
 ];
 
 // Instalar el Service Worker
