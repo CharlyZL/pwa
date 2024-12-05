@@ -6,37 +6,36 @@
   <title>CRUD PWA</title>
 
   <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(async function(OneSignal) {
-    await OneSignal.init({
-      appId: "898c9972-0ccb-40e0-8dfa-87fd079eaf9e",
-  serviceWorkerPath: 'OneSignalSDK-v16-ServiceWorker/OneSignalSDKWorker.js',
-      notifyButton: {
-      enable: true,
-      };
-         serviceWorker: {
-      scope: "/",
-      worker_url: "https://charlyzl.github.io/OneSignalSDKWorker.js"
-    }
+  <script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+      await OneSignal.init({
+        appId: "898c9972-0ccb-40e0-8dfa-87fd079eaf9e",  // Reemplaza con tu App ID
+        safari_web_id: "YOUR_SAFARI_WEB_ID",  // Reemplaza con tu Safari Web ID si es necesario
+        serviceWorkerPath: 'OneSignalSDK-v16-ServiceWorker/OneSignalSDKWorker.js',
+        notifyButton: {
+          enable: true
+        },
+        serviceWorker: {
+          scope: "/",
+          worker_url: "https://charlyzl.github.io/OneSignalSDKWorker.js"  // Asegúrate de que esta URL esté correcta
+        }
+      });
     });
-  });
-</script>
-
+  </script>
 
   <!-- Manifest -->
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#007bff">
 
   <!-- Service Worker -->
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js')
-      .then(registration => console.log('Service Worker registrado:', registration))
-      .catch(error => console.error('Error al registrar el Service Worker:', error));
-  }
-</script>
-
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(registration => console.log('Service Worker registrado:', registration))
+        .catch(error => console.error('Error al registrar el Service Worker:', error));
+    }
+  </script>
 
   <style>
     body {
